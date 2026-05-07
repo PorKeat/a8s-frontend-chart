@@ -40,6 +40,15 @@ spec:
           {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  set -a
+                  . /vault/secrets/app.env
+                  set +a
+                  node .next/standalone/server.js
+                  
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
