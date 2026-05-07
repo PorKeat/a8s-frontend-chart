@@ -44,9 +44,11 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          {{- if .Values.envSecretName }}
           envFrom:
             - secretRef:
-                name: {{ .Values.envSecretName }}
+                name: {{ .Values.envSecretName | quote }}
+          {{- end }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
