@@ -42,13 +42,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
           command: ["/bin/sh", "-c"]
-              args:
-                - |
-                  set -a
-                  . /vault/secrets/app.env
-                  set +a
-                  node .next/standalone/server.js
-                  
+          args:
+            - |
+              set -a
+              . /vault/secrets/app.env
+              set +a
+              node .next/standalone/server.js
+
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
