@@ -47,7 +47,7 @@ spec:
               set -a
               . /vault/secrets/app.env
               set +a
-              node .next/standalone/server.js
+              node server.js
 
           ports:
             - name: http
