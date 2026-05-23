@@ -11,7 +11,7 @@ image:
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "67894f20"
+  tag: "83953db3"
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
 # This is to override the chart name.
@@ -40,6 +40,10 @@ podAnnotations:
     {{ $k }}="{{ $v }}"
     {{- end }}
     {{- end }}
+  vault.hashicorp.com/agent-pre-populate-only: "true"
+  vault.hashicorp.com/tls-secret: vault-ca
+  vault.hashicorp.com/ca-cert: /vault/tls/ca.crt
+  vault.hashicorp.com/agent-inject-perms-app.env: "0644"
 # This is for setting Kubernetes Labels to a Pod.
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 podLabels: {}
